@@ -1,0 +1,59 @@
+<config>
+	<modules>
+		<Jne_Jneshipment>
+			<version>1.0.3</version>
+		</Jne_Jneshipment>
+	</modules>
+	<global>
+		<helpers>
+			<jne_jneshipment>
+				<class>Jne_Jneshipment_Helper</class>
+			</jne_jneshipment>
+		</helpers>
+		<models>
+			<jne_jneshipment>
+				<class>Jne_Jneshipment_Model</class>
+			</jne_jneshipment>
+		</models>
+		<blocks>
+			<jne_jneshipment>
+				<class>Jne_Jneshipment_Block</class>
+			</jne_jneshipment>
+			<checkout>
+				<rewrite>
+					<onepage_shipping_method_available>Jne_Jneshipment_Block_Available</onepage_shipping_method_available>
+				</rewrite>
+			</checkout>
+		</blocks>
+	</global>
+	
+	<frontend>
+		<layout>
+			<updates>
+				<jne_jneshipment>
+					<file>jne_jneshipment.xml</file>
+				</jne_jneshipment>
+			</updates>
+		</layout>
+	</frontend>
+	
+	<default>
+		<carriers>
+			<flatrate>
+				<infotext></infotext>
+			</flatrate>
+			<jne>
+				<active>0</active>
+				<sallowspecific>0</sallowspecific>
+				<model>jne_jneshipment/carrier_jne</model>
+				<name>JNE</name>
+				<price>5.00</price>
+				<infotext></infotext>
+				<title>JNE</title>
+				<type>I</type>
+				<specificerrmsg>This shipping method is currently unavailable. If you would like to ship using this shipping method, please contact us.</specificerrmsg>
+				<handling_type>F</handling_type>
+			</jne>
+		</carriers>
+	</default>
+</config>
