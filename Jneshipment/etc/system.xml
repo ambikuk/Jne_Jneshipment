@@ -10,8 +10,7 @@
 			<show_in_website>1</show_in_website>
 			<show_in_store>1</show_in_store>
 			<groups>
-
-				<jne translate="label">
+				<jneshipment translate="label">
 					<label>JNE</label>
 					<frontend_type>text</frontend_type>
 					<sort_order>104</sort_order>
@@ -71,7 +70,7 @@
 							<show_in_store>1</show_in_store>
 						</infotext>
 					</fields>
-				</jne>
+				</jneshipment>
 			</groups>
 		</carriers>
 	</sections>

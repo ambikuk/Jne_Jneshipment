@@ -1,30 +1,77 @@
+<?xml version="1.0"?>
 <config>
 	<modules>
 		<Jne_Jneshipment>
-			<version>1.0.3</version>
+			<version>0.1.0</version>
 		</Jne_Jneshipment>
 	</modules>
 	<global>
-		<helpers>
-			<jne_jneshipment>
-				<class>Jne_Jneshipment_Helper</class>
-			</jne_jneshipment>
-		</helpers>
 		<models>
-			<jne_jneshipment>
+			<jneshipment>
 				<class>Jne_Jneshipment_Model</class>
-			</jne_jneshipment>
+				<resourceModel>jneshipment_mysql4</resourceModel>
+			</jneshipment>
+			<jneshipment_mysql4>
+				<class>Jne_Jneshipment_Model_Mysql4</class>
+				<entities>
+					<jneshipment>
+						<table>jneshipment</table>
+					</jneshipment>
+				</entities>
+			</jneshipment_mysql4>
 		</models>
+		<events>
+			<checkout_submit_all_after>
+				<observers>
+					<adminOrder>
+						<type>singleton</type>
+						<class>Jne_Jneshipment_Model_Observer</class>
+						<method>adminOrder</method>
+					</adminOrder>
+				</observers>
+			</checkout_submit_all_after>
+		</events>
+		<resources>
+			<jneshipment_setup>
+				<setup>
+					<module>Jne_Jneshipment</module>
+					<!--<class>Jne_Jneshipment_Model_Resource_Mysql4_Setup</class>-->
+				</setup>
+				<connection>
+					<use>core_setup</use>
+				</connection>
+			</jneshipment_setup>
+			<jneshipment_write>
+				<connection>
+					<use>core_write</use>
+				</connection>
+			</jneshipment_write>
+			<jneshipment_read>
+				<connection>
+					<use>core_read</use>
+				</connection>
+			</jneshipment_read>
+		</resources>
 		<blocks>
-			<jne_jneshipment>
+			<jneshipment>
 				<class>Jne_Jneshipment_Block</class>
-			</jne_jneshipment>
-			<checkout>
+			</jneshipment>
+			<sales>
 				<rewrite>
-					<onepage_shipping_method_available>Jne_Jneshipment_Block_Available</onepage_shipping_method_available>
+					<order_history>Jne_Jneshipment_Block_Sales_Order_History</order_history>
 				</rewrite>
-			</checkout>
+			</sales>
+			<adminhtml>
+				<rewrite>
+					<sales_order_grid>Jne_Jneshipment_Block_Adminhtml_Sales_Order_Grid</sales_order_grid>
+				</rewrite>
+			</adminhtml>
 		</blocks>
+		<helpers>
+			<jneshipment>
+				<class>Jne_Jneshipment_Helper</class>
+			</jneshipment>
+		</helpers>
 	</global>
 	
 	<frontend>
@@ -36,16 +83,32 @@
 			</updates>
 		</layout>
 	</frontend>
-	
+	<admin>
+		<routers>
+			<jneshipment>
+				<use>admin</use>
+				<args>
+					<module>Jne_Jneshipment</module>
+					<frontName>jneshipment</frontName>
+				</args>
+			</jneshipment>
+		</routers>
+	</admin>
+	<adminhtml>
+		<layout>
+			<updates>
+				<jneshipment>
+					<file>jneshipment.xml</file>
+				</jneshipment>
+			</updates>
+		</layout>
+	</adminhtml> 
 	<default>
 		<carriers>
-			<flatrate>
-				<infotext></infotext>
-			</flatrate>
-			<jne>
+			<jneshipment>
 				<active>0</active>
 				<sallowspecific>0</sallowspecific>
-				<model>jne_jneshipment/carrier_jne</model>
+				<model>jneshipment/carrier_jneshipment</model>
 				<name>JNE</name>
 				<price>5.00</price>
 				<infotext></infotext>
@@ -53,7 +116,7 @@
 				<type>I</type>
 				<specificerrmsg>This shipping method is currently unavailable. If you would like to ship using this shipping method, please contact us.</specificerrmsg>
 				<handling_type>F</handling_type>
-			</jne>
+			</jneshipment>
 		</carriers>
 	</default>
 </config>
